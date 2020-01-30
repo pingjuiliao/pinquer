@@ -1,4 +1,19 @@
-# pinquer_routed 
+# pinquer
+Social Media for college students to make comments, discussions on schoolwork, courses, and professors.
+
+## Technical detail
+Frontend:  
+HTML, CSS, Javascript,   
+  
+Backend:  
+node.js, express.js, socket.io, MongoDB  
+
+## To run 
+```
+npm start
+```
+
+## to developers
 http, css, javascripts
 以本資料夾（pinquer_routed資料夾）為根目錄，
 這就是使用者在進入pinquer可以看得到的網頁。
