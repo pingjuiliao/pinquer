@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="Shortcut Icon" type="image/x-icon" href="../images/shortcut_icon.png" />
+    <title>Pinquer 評課部落</title>
+    <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css"> -->
+    <link rel="stylesheet" href="../stylesheets/jquery-ui-1.10.4.slider.css">    
+    <link rel="stylesheet" href="../stylesheets/slider-pips.css">
+    <!-- Bootstrap Core CSS -->
+    <link href="../stylesheets/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../stylesheets/course.css" rel="stylesheet">
+</head>
+
+
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/"><img src="../images/pinquer_logo.png" alt=""></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left">
+                  <li>
+                    <a href="" class="page-scroll">瀏覽課程</a>
+                  </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+
+                    <% if(!loggedIn) { %>
+                    <li>
+                        <a class="page-scroll" href="/login">登入註冊</a>
+                    </li>
+                    <% } else { %>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= currentUser.username %><span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">個人頁面</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/logout">登出</a></li>
+                        
+                      </ul>
+                    </li>
+                    <% }%>
+
+                </ul>
+                <form class="navbar-form navbar-right" role="search" >
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="輸入課名">
+                  </div>
+                  <button type="/Volumes/Macintosh%20HD/Users/YuChuChen/Downloads/pinquer-gh-pages/login.htmlsubmit" class="btn btn-default">搜尋</button>
+                </form>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+<div class="site-map">
+    <a href="/">首頁</a>>
+    <a href="">瀏覽課程</a>>
+    <a href="">認識星空</a>
+</div>
+
+<section class="container" id="course">
+<div class="row">
+    <div class="course-info cardstyle course-card  col-lg-6 col-md-12 col-sm-12">
+        <h3><%= course.name %>(<%= course.credit %>學分)</h3>
+        <table class="table table-condensed">
+        <tr>
+            <th>授課老師</th>
+            <th>開課單位</th>
+            <th>地點</th>
+            <th>時間</th>
+        </tr>
+        <tr>    
+            <td><%= course.teachers %></td>
+            <td><%= course.department %></td>
+            <td><%= course.where %></td>
+            <td><%= course.when %></td>
+        </tr>
+        </table>
+    </div>
+    <div class="course-rating cardstyle course-card col-lg-offset-1 col-lg-5 col-md-12 col-sm-12">
+        <div class="rates-row">
+            <p>實用性</p>
+            <p class="rate1"></p>
+            <div class="flat-slider1 green-slider" id="slider"></div>
+            <!-- <input type="text" class="js-range" id="slider-1"> -->
+        </div>
+        <hr>
+        <div class="rates-row">
+            <p>困難度</p>
+            <p class="rate2"></p>
+            <div class="flat-slider2 yellow-slider" id="slider"></div>
+            <!-- <input type="text" class="js-range" id="slider-2"> -->
+        </div>
+        <hr>
+        <div class="rates-row">
+            <p>工作量</p>
+            <p class="rate3"></p>
+            <div class="flat-slider3 yellow-slider" id="slider"></div>
+            <!-- <input type="text" class="js-range" id="slider-3"> -->
+        </div> 
+    </div>  
+</div>
+</section>
+
+<section class="container" id="post">
+<!--     <% if(loggedIn) { %>
+        <button type="button" class="btn btn-success" id="type-btn">發表心得、提問</button>
+    <% } else {  %> -->
+        <a href="/login" id="login"><button type="button" class="btn btn-success">發表心得、提問</button></a>
+    <!--<% } %> -->
+    <div class="type-in row only-shadow">
+        <form action="" method="post">
+            <div class="type col-lg-3">
+                <label for="essay-type">選擇文章類型</label>
+                <select name="type" id="essay-type" class="form-control" >
+                     <option value="review">我要發表心得</option>
+                     <option value="ask">我要提問</option>
+                </select>                
+            </div>
+            <div class="title col-lg-9">
+                <label for="title">標題</label><input type="text" class="form-control" id="title" placeholder="請輸入標題" name="title">                
+            </div>
+            <div class="rater-section col-lg-12">
+                <label for="edit-rate" class="edit-rate">留下你對這門的評分</label>
+                <div class="course-rating edit-rate cardstyle col-lg-12 col-md-12 col-sm-12">
+                    <div class="rates-row edit-rates-row">
+                        <p>實用性</p>
+                        <label class="rsize1">請拖曳選擇</label>
+                        <div class="edit-slider1 edit-slider green-slider" id="slider"></div>
+                        <input class="edit-slider1 edit-slider green-slider" id="edit-usefulness" value="" style="visibility:hidden;" name="usefulness">
+                    </div>
+                    <hr>
+                    <div class="rates-row edit-rates-row">
+                        <p>困難度</p>
+                        <label class="rsize2">請拖曳選擇</label>
+                        <div class="edit-slider2 edit-slider yellow-slider" id="slider"></div>
+                        <input class="edit-slider1 edit-slider green-slider" id="edit-difficulty" value="" style="visibility:hidden;" name="difficulty">                
+                    </div>
+                    <hr>
+                    <div class="rates-row edit-rates-row">
+                        <p>工作量</p>
+                        <label class="rsize3">請拖曳選擇</label>
+                        <div class="edit-slider3 edit-slider yellow-slider" id="slider"></div>
+                        <input class="edit-slider1 edit-slider green-slider" id="edit-busy" value="" style="visibility:hidden;" name="workload">                
+                        </div> 
+                </div>                 
+            </div>
+            <div class="text col-lg-12">
+                <textarea name="content" id="content" class="form-control" cols="30" rows="5" placeholder="你可以在這裡描述更多修課心得或你的問題"></textarea>                
+            </div>
+            <div class="button col-lg-offset-10 col-lg-2">
+                <button type="button" class="btn btn-danger" id="cancel-btn">取消</button>
+                <button type="submit" class="btn btn-default">確認送出</button                
+            </div>
+
+        </form>
+    </div>
+</section>
+
+<section class="container list-col-4">
+    <h2>文章列表</h2>
+    <hr>
+    <!-- <div class="row"> -->
+        <% essays.forEach( function(essay) { %>
+            <% var i = 1 ; %>
+            <!-- 4個一行 -->
+            <% if ( i%4 == 0) { %> 
+            <div class="row">
+            <% } %>
+            <% if (essay.type == "ask") { %>
+                <a href="/essay-ask?essayId=<%= essay._id %>">
+                <div class="home-essay ask cardstyle" data-type="ask">
+                    <p class="essay-type ask">提問</p>
+                    <h3><%= essay.title %></h3>
+                    <hr>
+                    <p class="post-time"> <%= essay.by %> </p>
+                    <p class="post-time">2015/12/15發布</p>
+                    <div class="bottom ask">
+                        <p>
+                        <span class="course"><%= course.name %></span>
+                        <span class="review-num"> <%= essay.commentsCount %>則回覆</span>   
+                        </p>           
+                    </div>        
+                </div>
+                </a>    
+            <% } if (essay.type == "review") { %>
+                <a href="/essay-review?essayId=<%= essay._id %>">
+                <div class="home-essay feedback cardstyle" data-type="feedback">
+                    <p class="essay-type feedback">心得</p>
+                    <h3> <%= essay.title %></h3>
+                    <hr>
+                    <p class="score"><span class="score-title">實用度</span>：<%= essay.usefulness %></p>
+                    <p class="score"><span class="score-title">困難度</span>：<%= essay.difficulty %></p>
+                    <p class="score"><span class="score-title">工作量</span>：<%= essay.workload %></p>
+<!--                     <p>課程實用度：<%= essay.usefulness %>  分</p>
+                    <p>課程難易度：<%= essay.difficulty %>  分</p>
+                    <p>課程工作量：<%= essay.workload %>  分</p>
+ -->                    <p class="post-time"> <%= essay.by %> </p>
+                    <p class="post-time">2015/12/15發布</p>
+                    
+                    <div class="bottom feedback">
+                        <p>
+                        <span class="course"><%= course.name %></span>
+                        <span class="review-num"><%= essay.commentsCount %>則回覆</span> 
+                        </p>           
+                    </div>        
+                </div>
+                </a>
+            <% } %>
+            <% if ( i%4 == 0) { %> 
+            </div>
+            <% } %>
+            <% i++; %>
+        <% }) %>
+        <!-- <a href="essay-feedback.html">
+            <div class="home-essay feedback" data-type="feedback">
+                <p class="essay-type feedback">心得</p>
+                <h3>基本上這是一篇反推文</h3>
+                <hr>
+                <p class="score"><span class="score-title">實用度</span>：4</p>
+                <p class="score"><span class="score-title">難易度</span>：4</p>
+                <p class="score"><span class="score-title">工作量</span>：4</p>
+                <p class="post-time">2015/12/15發布</p>
+                <div class="bottom feedback">
+                    <p>
+                    <span class="course">認識星空</span>
+                    <span class="review-num">19則回覆</span> 
+                    </p>           
+                </div>        
+            </div>
+        </a>
+        
+        <a href="essay-ask.html">
+            <div class="home-essay ask" data-type="ask">
+                <p class="essay-type ask">提問</p>
+                <h3>想請問...?</h3>
+                <hr>
+                <p class="post-time">2015/12/15發布</p>
+                <div class="bottom ask">
+                    <p>
+                    <span class="course">認識星空</span>
+                    <span class="review-num">19則回覆</span> 
+                    <span class="review-num">5人也想知道</span> 
+                    </p>           
+                </div>        
+            </div>
+        </a> -->
+<!--         <a href="essay-notice.html">
+            <div class="home-essay notice" data-type="notice">
+                <p class="essay-type notice">公告</p>
+                <h3>下周開始換教室囉!</h3>
+                <hr>
+                <p class="post-time">2015/12/15發布</p>
+                <div class="bottom notice">
+                    <p>
+                    <span class="course">認識星空</span>
+                    <span class="review-num">19則回覆</span> 
+                    </p>           
+
+                </div>        
+            </div>    
+        </a>   -->  
+</section>
+
+<script src="../javascripts/jquery-1.11.3.min.js"></script>
+<script src="../javascripts/jquery-ui.min.js"></script>
+<script src="../javascripts/bootstrap.min.js"></script>
+<script type="text/javascript">
+    
+(function(){
+
+
+//發文區滑鼠偵測
+$('.type-in').hide();
+
+$('#login').on('mouseover', function(){
+    $('#login').find('button').text("發文前請先登入");
+});
+
+$('#login').on('mouseleave', function(){
+    $('#login').find('button').text("發表心得、提問");
+});
+
+//點擊發文滑出編輯區塊
+$('#type-btn').on('click', function(){
+    $('.type-in').slideDown();
+});
+$('#cancel-btn').on('click', function(){
+    $('.type-in').slideUp();
+});
+
+//form-control
+$('#essay-type').on('change' , function(){
+    var essayType = $('#essay-type').val();
+    console.log(essayType);
+    if (essayType == "ask") {
+        $('.edit-rate').hide();
+    } else if (essayType == "review"){
+        $('.edit-rate').show();
+    }
+});
+
+
+//這邊是總評分
+    $(".flat-slider1")
+        .slider({
+            min: 0,
+            max: 5,
+            range: "max",
+            value: 4.5,
+            step: 0.1
+
+    }).slider("disable");
+
+
+    $(".flat-slider2")
+        .slider({
+            min: 0,
+            max: 5,
+            range: "max",
+            value: 0.5,
+            step: 0.1
+
+    }).slider("disable");   
+
+    $(".flat-slider3")
+        .slider({ 
+            min: 0,
+            max: 5,
+            range: "max",
+            value: 3.0,
+            step: 0.1
+    }).slider("disable");    
+
+var rateValue1 = $('.flat-slider1').slider("option", "value"),
+    rateValue2 = $('.flat-slider2').slider("option", "value"),
+    rateValue3 = $('.flat-slider3').slider("option", "value");
+$('.rate1').text(rateValue1);
+$('.rate2').text(rateValue2);
+$('.rate3').text(rateValue3);
+
+//下面是編輯評分
+
+var score = [1, 2, 3, 4, 5];
+
+var usefulness = ["好像沒學到什麼耶", "我有學到一點東西", "普普通通", "頗有用" ,"我的生命少不了這門課"];
+
+var difficulty = ["根本難不倒我", "稍微讀一下即可", "普普通通", "需要有點程度", "需要用生命苦讀"];
+
+var busy = ["閒到幾乎忘了這門課", "沒做什麼事情", "普普通通", "不是很輕鬆呢", "將會使你焦頭爛額"];
+
+    $(".edit-slider1").slider({
+        range: "max",
+        min: 0,
+        max: usefulness.length - 1,
+        step: 1,
+        slide: function(event, ui) {
+            $(".rsize1").text(score[ui.value] + usefulness[ui.value]);
+            $("#edit-usefulness").attr("value", score[ui.value]);
+        }
+    });
+
+    $(".edit-slider2").slider({
+        range: "max",
+        min: 0,
+        max: difficulty.length - 1,
+        step: 1,
+        slide: function(event, ui) {
+            $(".rsize2").text(score[ui.value] + difficulty[ui.value]);
+            $("#edit-difficulty").attr("value", score[ui.value]);
+        }
+    });
+
+    $(".edit-slider3").slider({
+        range: "max",
+        min: 0,
+        max: busy.length - 1,
+        step: 1,
+        slide: function(event, ui) {
+            $(".rsize3").text(score[ui.value] + busy[ui.value]);
+            $("#edit-busy").attr("value", score[ui.value]);
+        }
+    });
+
+
+    var homeCourse = $('.home-course'),
+        logoGreen = '#209e40',
+        brown = '#932009';
+
+    homeCourse.on('mouseenter', function(){
+        $(this)
+            .children('h3').css('color', logoGreen)
+            .end()
+            .children('.prof').css('color', logoGreen);
+    }).on('mouseleave', function(){
+        $(this)
+            .children('h3').css('color', brown)
+            .end()
+            .children('.prof').css('color', brown);
+    });
+
+    var homeFeedback = $(".home-essay[data-type='feedback']"),
+        homeAsk = $(".home-essay[data-type='ask']"),
+        homeNotice = $(".home-essay[data-type='notice']"),
+        essayGreen = '#107b5d',
+        essayOrg = '#f0542a',
+        essayYellow = '#f3ae1e';
+
+
+        homeFeedback.on('mouseenter', function(){
+        $(this)
+            .children('h3').css('color', essayGreen)
+            .end()
+            .children('.post-time').css('color', essayGreen);
+    }).on('mouseleave', function(){
+        $(this)
+            .children('h3').css('color', brown)
+            .end()
+            .children('.post-time').css('color', brown);
+    });
+    homeAsk.on('mouseenter', function(){
+        $(this)
+            .children('h3').css('color', essayOrg)
+            .end()
+            .children('.post-time').css('color', essayOrg);
+    }).on('mouseleave', function(){
+        $(this)
+            .children('h3').css('color', brown)
+            .end()
+            .children('.post-time').css('color', brown);
+    });
+    homeNotice.on('mouseenter', function(){
+        $(this)
+            .children('h3').css('color', essayYellow)
+            .end()
+            .children('.post-time').css('color', essayYellow);
+    }).on('mouseleave', function(){
+        $(this)
+            .children('h3').css('color', brown)
+            .end()
+            .children('.post-time').css('color', brown);
+    });
+})();
+
+
+
+</script>
+
+    
+<footer id="footerDomain">
+    <div class="bottom-info">
+    <img src="../images/logo_white.png" alt="">
+      <p>COPYRIGHT © ALL RIGHTS RESERVED.</p>
+    </div>
+</footer>
+</body>
+
+</html>

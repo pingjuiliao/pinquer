@@ -1,0 +1,133 @@
+@import "_constants.scss";
+
+
+#course {
+	.course-card {
+		@include grid(2, 45%,100%);
+		margin-bottom: 0;
+		border-bottom: #ededed 2px solid;
+		min-height: 190px;
+		padding:10px 20px;
+	}
+	.course-info {
+		h3 {
+			color: $logoGreen;
+			font-weight: bold;
+			margin: 0;
+			padding: 20px 0 0 5px;
+		}
+	}
+
+}
+
+table {
+	margin: 30px 0 10px 0;
+	tr>th {
+		color: $darkGray;
+		font-weight: normal;
+	}
+	tr>td {
+		color:$logoGreen;
+	}
+}
+
+.course-rating {
+	hr {
+		margin: 0;
+		padding: 0;
+		border-top: 1.5px solid #f4f4f4;
+	}
+}
+
+.rates-row {
+	margin: 10px 0 10px 0;
+	p {
+		display: inline-block;
+		margin: 0;
+		text-align: center;
+		vertical-align: middle;
+		&:first-child {
+			border-radius:5px;
+			border: 2px solid $logoGreen;
+			width:20%;
+			padding:5px;
+			color: $logoGreen;
+			font-weight: bold;
+			letter-spacing: 2px;		
+		}
+		&:nth-child(2){
+			width: 10%;
+			font-size: 1.4em;
+			font-weight: bold;
+		}
+	}
+	#slider {
+		width: 65%;
+		display: inline-block;
+		// left: 5%;
+		vertical-align: middle;
+	}
+}
+
+#login>button, #type-btn {
+	margin:20px 0px;
+	width: 15%;
+}
+
+.type-in {
+	// border: 2px $logoGreen solid;
+	background-color: white;
+	border-radius:5px;
+	padding:20px;
+}
+
+.edit-rates-row.rates-row {
+	padding: 10px 20px;
+	* {
+		vertical-align:middle;		
+	}
+	input {
+		display: none;
+	}
+	p {
+	}
+	label {
+		width: 20%;
+		text-align: center;
+	}
+	#slider {
+		width: 55%;	
+	}
+}
+
+
+.edit-rate,
+select,
+input#title,
+textarea {
+	margin-bottom: 20px;
+}
+
+.feedback {
+	.score {
+		font-size: 14px;
+		color: $logoGreen;
+		margin-top: 20px;
+		width: 30%;
+		display:inline-block;
+	}
+	.score-title {
+		border-radius:5px;
+		border: 2px solid $logoGreen;
+		padding:2px;
+	}
+}
+
+@media (max-width: 996px) {
+	#course {
+		.course-card {
+			@include grid(1, 90%,100%);
+			margin-bottom: 5%;
+		}
+	}
+}
